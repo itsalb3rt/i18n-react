@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import './i18n/i18n';
+import Menu from './components/Menu';
 
 ReactDOM.render(
   <React.StrictMode>
+    <Menu/>
     <App />
   </React.StrictMode>,
   document.getElementById('root')
