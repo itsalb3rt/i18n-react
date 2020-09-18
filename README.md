@@ -124,7 +124,7 @@ JSON file exmaple
     },
     "ConferenceRooms":{
         "maxUsersAllowed":"Max Users Allowed",
-        "form"{
+        "form":{
             "information":{
                 "maxUsers":"Max Users"
             },
