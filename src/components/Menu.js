@@ -1,11 +1,11 @@
 import React from 'react';
-import { withNamespaces } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import i18next from 'i18next';
 
 import './assets/styles.css'
 
-const Menu = (props) => {
-    const { t } = props;
+const Menu = () => {
+    const { t } = useTranslation();
     const items = [
         { label: t('menu.home') },
         { label: t('menu.contact') },
@@ -35,4 +35,4 @@ const Menu = (props) => {
     )
 }
 
-export default withNamespaces(['common'])(Menu);
+export default Menu;
