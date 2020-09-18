@@ -3,5 +3,8 @@
         "home": "Inicio",
         "contact": "Contacto",
         "information": "Información "
+    },
+    "body": {
+        "description":"Estoy perdido en un arco iris, ahora nuestro arco iris se ha ido, cubierto por tu sombra, mientras nuestros mundos avanzan."
     }
 }
