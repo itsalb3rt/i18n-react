@@ -1,20 +1,20 @@
 import i18n from "i18next";
-import { reactI18nextModule } from "react-i18next";
+import { initReactI18next } from "react-i18next";
 
 import en from './locales/en.json';
 import es from './locales/es.json';
 // the translations
 const resources = {
     en: {
-        common: en
+        translation: en
     },
     es: {
-        common: es
+        translation: es
     }
 };
 
 i18n
-    .use(reactI18nextModule) // passes i18n down to react-i18next
+    .use(initReactI18next) // passes i18n down to react-i18next
     .init({
         resources,
         lng: "en",

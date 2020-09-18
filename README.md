@@ -1,68 +1,145 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# i18n implementation
 
-## Available Scripts
+Everything documented is made to be as generic as possible and applicable to any React project, The rules that you will see below are suggested and not mandatory.
 
-In the project directory, you can run:
+---
 
-### `yarn start`
+# Content
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Implementation](#implementation)
+    - [i18n instace](#i18n-instace)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- [How to use in components](#how-to-use-in-components)
+  
+- [i18n Rules](#i18n-rules)
+  
+- [Extra](#extra)
 
-### `yarn test`
+---
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Implementation
 
-### `yarn build`
+First install dependencies:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+$ npm install i18next
+# and
+$ npm install react-i18next
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### i18n instace
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```javascript
+// src/index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import './i18n/i18n'; // Simple import
 
-### `yarn eject`
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```javascript
+// src/i18n/i18n.js
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+import en from './locales/en.json';
 
-## Learn More
+// the translations
+const resources = {
+  en: {
+    translation: en
+  }
+};
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+i18n
+  .use(initReactI18next) // passes i18n down to react-i18next
+  .init({
+    resources,
+    lng: "en",
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    keySeparator: '.', //for use dot notation. Example: {t(actions.save)}
 
-### Code Splitting
+    interpolation: {
+      escapeValue: false // react already safes from xss
+    }
+  });
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+export default i18n;
+```
 
-### Analyzing the Bundle Size
+```json
+// src/i18n/locales/en.json
+{
+    "title": {
+        "home":"Home"
+    }
+}
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## How to use in components
 
-### Making a Progressive Web App
+To use it in components you just have to import `useTranslation` and destructuring the `t` function from `useTranslation`.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+```javascript
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-### Advanced Configuration
+const MyComponent = () => {
+    render() {
+        const {t} = useTranslation();
+        return <h1>{t('title.home')}</h1>
+    }
+}
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+export default MyComponent;
+```
 
-### Deployment
+## i18n Rules
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+- The maximum depth is 3 levels (*root -> category -> item || subcategory -> value*)
+- Not item in root (*Only categories || objects*)
+- All tranlations store in `src/i18n/locales` in JSON file with only the short name language (*en, es, fr*)
+- All `key` use camleCase
 
-### `yarn build` fails to minify
+JSON file exmaple
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```json
+// src/i18n/locales/en.json
+{
+    "configurations":{
+        "general":"General"
+    },
+    "extensions":{
+        "name":"Name",
+        "number":"Number"
+    },
+    "ConferenceRooms":{
+        "maxUsersAllowed":"Max Users Allowed",
+        "form"{
+            "information":{
+                "maxUsers":"Max Users"
+            },
+            "settings":{
+                "AnnounceUsersCount":"Announce users count",
+                "AnnounceUserJoinLeave":"Announce user Join Leave"
+            }
+        }
+    }
+}
+```
+
+## Extra
+
+Documentation
+[https://react.i18next.com/guides/quick-start](https://react.i18next.com/guides/quick-start)
+
+---
