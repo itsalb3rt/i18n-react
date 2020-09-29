@@ -5,6 +5,7 @@
         "information": "Información "
     },
     "body": {
-        "description":"Estoy perdido en un arco iris, ahora nuestro arco iris se ha ido, cubierto por tu sombra, mientras nuestros mundos avanzan."
+        "description":"Estoy perdido en un arco iris, ahora nuestro arco iris se ha ido, cubierto por tu sombra, mientras nuestros mundos avanzan.",
+            "descriptionApp": "Esta es una aplicación simple para demostrar la biblioteca i18n, este texto proviene de un componente de clase."
     }
 }

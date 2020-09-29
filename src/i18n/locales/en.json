@@ -5,6 +5,7 @@
         "information": "Information"
     },
     "body": {
-        "description": "I am lost in a rainbow, Now our rainbow is gone, Overcast by your shadow, As our worlds move on."
+        "description": "I am lost in a rainbow, Now our rainbow is gone, Overcast by your shadow, As our worlds move on.",
+        "descriptionApp": "This is a simple app for demonstrated the i18n library, this text come from a class component."
     }
 }
