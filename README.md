@@ -9,7 +9,14 @@ Everything documented is made to be as generic as possible and applicable to any
 - [Implementation](#implementation)
     - [i18n instace](#i18n-instace)
 
-- [How to use in components](#how-to-use-in-components)
+- [i18n implementation](#i18n-implementation)
+- [Content](#content)
+  - [Implementation](#implementation)
+      - [i18n instace](#i18n-instace)
+  - [How to use in components](#how-to-use-in-components)
+  - [How to use in Class component](#how-to-use-in-class-component)
+  - [i18n Rules](#i18n-rules)
+  - [Extra](#extra)
   
 - [i18n Rules](#i18n-rules)
   
@@ -101,6 +108,25 @@ const MyComponent = () => {
 }
 
 export default MyComponent;
+```
+
+## How to use in Class component
+
+```javascript
+import React, { Component } from 'react';
+import i18n from '../i18n/i18n'; // Import i18n from root dir
+
+class Description extends Component {
+
+    render() {
+        return (<p>
+                {i18n.t('body.descriptionApp')}
+            </p>
+        )
+    }
+}
+
+export default Description;
 ```
 
 ## i18n Rules
